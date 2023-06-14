@@ -1,5 +1,6 @@
+const fs = require("fs");
+const filePath = "messages.txt"
+let messages = fs.readFileSync(filePath, "utf8")
 console.log("Start program");
-console.log("First message");
-console.log("Second message");
-console.log("Third message");
+console.log(messages);
 console.log("End program");
