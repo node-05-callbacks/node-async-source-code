@@ -13,23 +13,17 @@ function readFileAsync(filePath, encoding) {
   });
 }
 
-console.log("Start program");
+async function start() {
+  try {
+    for (const filePath of filePaths) {
+      let data = await readFileAsync(filePath, "utf8");
+      console.log(data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-readFileAsync(filePaths[0], "utf8")
-  .then((data) => {
-    console.log(data);
-    return readFileAsync(filePaths[1], "utf8");
-  })
-  .then((data) => {
-    console.log(data);
-    return readFileAsync(filePaths[2], "utf8");
-  })
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    console.log("End program");
-  });
+console.log("Start program");
+start();
+console.log("End program");
