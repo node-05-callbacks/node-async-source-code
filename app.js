@@ -22,8 +22,8 @@ async function start() {
   } catch (error) {
     console.log(error);
   }
+  console.log("End program");
 }
 
 console.log("Start program");
 start();
-console.log("End program");
