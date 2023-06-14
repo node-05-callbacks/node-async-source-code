@@ -1,6 +1,10 @@
 const fs = require("fs");
-const filePath = "messages.txt"
-let messages = fs.readFileSync(filePath, "utf8")
+const filePaths = ["message1.txt", "message2.txt", "message3.txt"]
+
+
 console.log("Start program");
-console.log(messages);
+for (const filePath of filePaths) {
+  let message = fs.readFileSync(filePath, "utf8")
+  console.log(message);
+}
 console.log("End program");
