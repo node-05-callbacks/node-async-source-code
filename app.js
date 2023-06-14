@@ -1,23 +1,32 @@
 const fs = require("fs");
 const filePaths = ["message1.txt", "message2.txt", "message3.txt"];
 
-function print(err, message) {
-  if (err) {
-    console.log(err);
-  }
-  console.log(message);
+function readFileAsync(filePath, encoding) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath,  encoding, (err, message) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(message);
+      }
+    });
+  });
 }
 
 console.log("Start program");
 
-fs.readFile(filePaths[0], "utf8", (err, message) => {
-  print(err, message);
-  fs.readFile(filePaths[1], "utf8", (err, message) => {
-    print(err, message);
-    fs.readFile(filePaths[2], "utf8", (err, message) => {
-      print(err, message);
-    });
-  });
-});
+readFileAsync(filePaths[0], "utf8")
+  .then((data) => {
+    console.log(data);
+    return readFileAsync(filePaths[1], "utf8");
+  })
+  .then((data) => {
+    console.log(data);
+    return readFileAsync(filePaths[2], "utf8");
+  }).then((data) => {
+    console.log(data);
+  }).catch((err)=>{
+    console.log(err);
+  })
 
 console.log("End program");
